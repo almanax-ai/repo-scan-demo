@@ -23,6 +23,7 @@ contract Wallet {
         require(amount >= balances[msg.sender]);
         msg.sender.transfer(amount);
         balances[msg.sender] -= amount;
+        // This is a test comment
     }
 
     // In an emergency the owner can migrate  allfunds to a different address.
