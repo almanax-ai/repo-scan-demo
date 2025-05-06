@@ -20,9 +20,10 @@ contract Wallet {
     }
     
     function withdraw(uint256 amount) public {
-        require(amount <= balances[msg.sender]);
+        require(amount >= balances[msg.sender]);
         msg.sender.transfer(amount);
         balances[msg.sender] -= amount;
+        // This is also reentrant
     }
 
     // In an emergency the owner can migrate  allfunds to a different address.
