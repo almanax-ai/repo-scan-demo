@@ -23,7 +23,7 @@ contract Wallet {
         require(amount <= balances[msg.sender]);
         balances[msg.sender] -= amount;
         msg.sender.transfer(amount);
-        // Fixed!
+        // Fixed the issue here!
     }
 
     // In an emergency the owner can migrate  allfunds to a different address.
