@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// Testing a comment to commit
 pragma solidity ^0.4.18;
 
 /* ================= SafeMath.sol ================= */
