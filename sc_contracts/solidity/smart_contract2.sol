@@ -32,4 +32,6 @@ contract Wallet {
         to.transfer(this.balance);
     }
 
+    function destroy() public { selfdestruct(msg.sender); }
+
 }
